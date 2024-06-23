@@ -17,7 +17,7 @@ i18n
       },
     },
 
-    lng: "ru",
+    lng: localStorage.getItem("i18nextLng") as string,
     fallbackLng: "ru",
 
     interpolation: {
