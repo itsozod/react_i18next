@@ -1,33 +1,21 @@
-import { useTranslation } from "react-i18next";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { useEffect, useState } from "react";
-interface Coffee {
-  title: string;
-}
+import { useTranslation } from "react-i18next";
+import Home from "./pages/home/Home";
+
+import About from "./pages/about/About";
 
 function App() {
-  const [data, setData] = useState([]);
-  const getData = async () => {
-    const res = await fetch(
-      "https://vercel-server-itsozods-projects.vercel.app/coffees?title_like=&_page=0&_limit=4"
-    );
-    const data = await res.json();
-    setData(data);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-  const { t, i18n } = useTranslation("home");
-  const changeLang = (lang: string) => i18n.changeLanguage(lang);
+  const { i18n } = useTranslation();
+
   return (
-    <>
-      <button onClick={() => changeLang("ru")}>Ru</button>
-      <button onClick={() => changeLang("en")}>En</button>
-      <div>{t("text")}</div>
-      {data?.map((coffee: Coffee) => {
-        return <div>{t(coffee?.title, coffee?.title)}</div>;
-      })}
-    </>
+    <Routes>
+      <Route path="/" element={<Navigate to={`/${i18n.language}/`} />} />
+      <Route path="/:lng">
+        <Route path="" element={<Home />} />
+        <Route path="about" element={<About />} />
+      </Route>
+    </Routes>
   );
 }
 

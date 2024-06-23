@@ -1,0 +1,13 @@
+{
+  "home": {
+    "text": "Hello Home Page"
+  },
+  "about": {
+    "text": "About Page"
+  },
+  "link": {
+    "navigate": "Navigate to",
+    "home": "Home",
+    "about": "About"
+  }
+}
